@@ -1,6 +1,7 @@
+import * as Haptics from 'expo-haptics';
 import { useFocusEffect } from 'expo-router';
 import { useCallback, useState } from 'react';
-import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { Alert, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import MealItem from '../../components/MealItem';
 import { clearAllMeals, getMeals, Meal } from '../../storage/meals';
 import { globalStyles } from '../../styles/global';
@@ -13,9 +14,19 @@ export default function AllMealsScreen() {
     setMeals(data);
   };
 
-  const handleClearAll = async () => {
-    await clearAllMeals();
-    loadMeals();
+  const handleClearAll = () => {
+    Alert.alert('Delete Meals', `Are you sure you want to delete all meals?`, [
+          { text: 'Cancel', style: 'cancel' },
+          {
+            text: 'Delete',
+            style: 'destructive',
+            onPress: async () => {
+              await clearAllMeals()
+              Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+              loadMeals()
+            },
+          },
+        ]);
   };
 
   useFocusEffect(
