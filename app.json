@@ -43,6 +43,13 @@
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
-    }
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "f5b3334a-5dbb-419c-b2a2-b00dfa215705"
+      }
+    },
+    "owner": "centereddiv"
   }
 }
