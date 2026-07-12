@@ -1,5 +1,7 @@
 # Todo list
 
-*change styling
-*add feature to edit meals
-*add confirmation popup before deleting all meals
+*change styling xx
+
+*add feature to edit meals xx
+
+*add confirmation popup before deleting all meals xx

@@ -39,3 +39,27 @@ export const deleteMeal = async (id: string): Promise<void> => {
 export const clearAllMeals = async (): Promise<void> => {
   await AsyncStorage.removeItem(MEALS_KEY);
 }
+
+export const updateMeal = async (
+  id: string,
+  updates: Partial<Omit<Meal, 'id' | 'createdAt'>>,
+): Promise<Meal | null> => {
+  const meals = await getMeals();
+
+  const index = meals.findIndex((meal) => meal.id === id);
+
+  if (index === -1) {
+    return null;
+  }
+
+  const updatedMeal: Meal = {
+    ...meals[index],
+    ...updates,
+  };
+
+  meals[index] = updatedMeal;
+
+  await AsyncStorage.setItem(MEALS_KEY, JSON.stringify(meals));
+
+  return updatedMeal;
+};
